@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <contextName>community</contextName>
+    <!-- 日志存放路径-->
     <property name="LOG_PATH" value="D:/work/data"/>
+    <!-- 日志存放文件夹-->
     <property name="APPDIR" value="community"/>
 
-    <!-- error file -->
+    <!-- error file error级别的日志文件-->
     <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/${APPDIR}/log_error.log</file>
+        <!-- 日志滚动策略 每份日志最大5mb，按天数当文件名-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/${APPDIR}/error/log-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -14,11 +17,14 @@
             </timeBasedFileNamingAndTriggeringPolicy>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
+        <!-- append代表追加方式，会形成多个文件-->
         <append>true</append>
+        <!-- 具体的日志记录格式： 级别+线程+文件的第几行+具体的信息-->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>%d %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
             <charset>utf-8</charset>
         </encoder>
+        <!--设置过滤器表示拦截error级别的日志-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>error</level>
             <onMatch>ACCEPT</onMatch>
@@ -70,7 +76,7 @@
         </filter>
     </appender>
 
-    <!-- console -->
+    <!-- console控制台日志 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
@@ -80,9 +86,9 @@
             <level>debug</level>
         </filter>
     </appender>
-
+    <!--设置该项目种的日志级别是debug-->
     <logger name="com.nowcoder.community" level="debug"/>
-
+    <!--总设置-->
     <root level="info">
         <appender-ref ref="FILE_ERROR"/>
         <appender-ref ref="FILE_WARN"/>

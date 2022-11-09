@@ -97,7 +97,7 @@ public class UserService implements CommunityConstant {
         user.setCreateTime(new Date());
         userMapper.insertUser(user);
 
-        // 激活邮件
+        // 激活邮件 调用templateEngine引擎将context种保存的email和url动态替换到html种
         Context context = new Context();
         context.setVariable("email", user.getEmail());
         // http://localhost:8080/community/activation/101/code

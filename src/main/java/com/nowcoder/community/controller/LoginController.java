@@ -97,7 +97,6 @@ public class LoginController implements CommunityConstant {
 
         // 将验证码存入session
         // session.setAttribute("kaptcha", text);
-
         // 验证码的归属
         String kaptchaOwner = CommunityUtil.generateUUID();
         Cookie cookie = new Cookie("kaptchaOwner", kaptchaOwner);
@@ -129,9 +128,9 @@ public class LoginController implements CommunityConstant {
             String redisKey = RedisKeyUtil.getKaptchaKey(kaptchaOwner);
             kaptcha = (String) redisTemplate.opsForValue().get(redisKey);
         }
-
         if (StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)) {
             model.addAttribute("codeMsg", "验证码不正确!");
+            //回到登录页面
             return "/site/login";
         }
 
@@ -139,6 +138,7 @@ public class LoginController implements CommunityConstant {
         int expiredSeconds = rememberme ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS;
         Map<String, Object> map = userService.login(username, password, expiredSeconds);
         if (map.containsKey("ticket")) {
+            //将ticket保存到cookie中，setPath表示设置到/community下，项目路径下就全部生效了
             Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
             cookie.setPath(contextPath);
             cookie.setMaxAge(expiredSeconds);

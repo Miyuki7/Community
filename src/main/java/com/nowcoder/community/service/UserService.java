@@ -124,7 +124,6 @@ public class UserService implements CommunityConstant {
 
     public Map<String, Object> login(String username, String password, long expiredSeconds) {
         Map<String, Object> map = new HashMap<>();
-
         // 空值处理
         if (StringUtils.isBlank(username)) {
             map.put("usernameMsg", "账号不能为空!");
@@ -134,20 +133,17 @@ public class UserService implements CommunityConstant {
             map.put("passwordMsg", "密码不能为空!");
             return map;
         }
-
         // 验证账号
         User user = userMapper.selectByName(username);
         if (user == null) {
             map.put("usernameMsg", "该账号不存在!");
             return map;
         }
-
         // 验证状态
         if (user.getStatus() == 0) {
             map.put("usernameMsg", "该账号未激活!");
             return map;
         }
-
         // 验证密码
         password = CommunityUtil.md5(password + user.getSalt());
         if (!user.getPassword().equals(password)) {
@@ -161,8 +157,9 @@ public class UserService implements CommunityConstant {
         loginTicket.setTicket(CommunityUtil.generateUUID());
         loginTicket.setStatus(0);
         loginTicket.setExpired(new Date(System.currentTimeMillis() + expiredSeconds * 1000));
+        //改进前，将登录凭证插入到数据库
 //        loginTicketMapper.insertLoginTicket(loginTicket);
-
+        //改进后，将登录凭证放入redis中
         String redisKey = RedisKeyUtil.getTicketKey(loginTicket.getTicket());
         redisTemplate.opsForValue().set(redisKey, loginTicket);
 

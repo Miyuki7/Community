@@ -117,12 +117,12 @@ public class MessageController implements CommunityConstant {
 
         if (letterList != null) {
             for (Message message : letterList) {
+                //只有该用户是消息接收者时后才会改变该消息的状态
                 if (hostHolder.getUser().getId() == message.getToId() && message.getStatus() == 0) {
                     ids.add(message.getId());
                 }
             }
         }
-
         return ids;
     }
 
@@ -133,10 +133,10 @@ public class MessageController implements CommunityConstant {
         if (target == null) {
             return CommunityUtil.getJSONString(1, "目标用户不存在!");
         }
-
         Message message = new Message();
         message.setFromId(hostHolder.getUser().getId());
         message.setToId(target.getId());
+        //将ConversationId始终设置成前小后大  101_102
         if (message.getFromId() < message.getToId()) {
             message.setConversationId(message.getFromId() + "_" + message.getToId());
         } else {
@@ -145,7 +145,6 @@ public class MessageController implements CommunityConstant {
         message.setContent(content);
         message.setCreateTime(new Date());
         messageService.addMessage(message);
-
         return CommunityUtil.getJSONString(0);
     }
 

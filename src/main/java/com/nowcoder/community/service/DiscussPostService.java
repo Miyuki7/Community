@@ -109,7 +109,7 @@ public class DiscussPostService {
             throw new IllegalArgumentException("参数不能为空!");
         }
 
-        // 转义HTML标记
+        // 转义HTML标记,将类似与<script></script>当作寻常字符串
         post.setTitle(HtmlUtils.htmlEscape(post.getTitle()));
         post.setContent(HtmlUtils.htmlEscape(post.getContent()));
         // 过滤敏感词

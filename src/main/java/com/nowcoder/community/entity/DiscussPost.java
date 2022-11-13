@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.Date;
-
+//索引名称  _doc:没什么用，类型在es7被废弃，shards：分片，replicas：副本
 @Document(indexName = "discusspost", type = "_doc", shards = 6, replicas = 3)
 public class DiscussPost {
 
@@ -16,7 +16,7 @@ public class DiscussPost {
     @Field(type = FieldType.Integer)
     private int userId;
 
-    // 互联网校招
+    // 互联网校招,分词器
     @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_smart")
     private String title;
 

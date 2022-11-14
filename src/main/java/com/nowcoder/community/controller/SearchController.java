@@ -12,10 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class SearchController implements CommunityConstant {
@@ -59,5 +56,16 @@ public class SearchController implements CommunityConstant {
 
         return "/site/search";
     }
-
+    public String customSortString(String order, String s) {
+        int[] val = new int[26];
+        for (int i = 0; i < order.length(); i++) {
+            val[order.charAt(i) - 'a'] = i + 1;
+        }
+        Character[] arr = new Character[s.length()];
+        for (int i = 0; i < s.length(); ++i) {
+            arr[i] = s.charAt(i);
+        }
+        Arrays.sort(arr, (c0, c1) -> val[c0 - 'a'] - val[c1 - 'a']);
+        return Arrays.toString(arr);
+    }
 }

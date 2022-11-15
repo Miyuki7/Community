@@ -36,7 +36,7 @@ public class DiscussPostService {
     @Value("${caffeine.posts.expire-seconds}")
     private int expireSeconds;
 
-    // Caffeine核心接口: Cache, LoadingCache, AsyncLoadingCache
+    // Caffeine核心接口: Cache, LoadingCache(没有从数据库查), AsyncLoadingCache（异步查数据库）
 
     // 帖子列表缓存
     private LoadingCache<String, List<DiscussPost>> postListCache;

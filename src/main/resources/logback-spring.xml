@@ -87,7 +87,7 @@
         </filter>
     </appender>
     <!--设置该项目种的日志级别是debug-->
-    <logger name="com.nowcoder.community" level="debug"/>
+    <logger name="com.miyuki.community" level="debug"/>
     <!--总设置-->
     <root level="info">
         <appender-ref ref="FILE_ERROR"/>

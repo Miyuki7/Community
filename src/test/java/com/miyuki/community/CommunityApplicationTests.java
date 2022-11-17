@@ -1,6 +1,5 @@
 package com.miyuki.community;
 
-import com.miyuki.community.dao.AlphaDao;
 import com.miyuki.community.service.AlphaService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,16 +27,7 @@ public class CommunityApplicationTests implements ApplicationContextAware {
 		this.applicationContext = applicationContext;
 	}
 
-	@Test
-	public void testApplicationContext() {
-		System.out.println(applicationContext);
 
-		AlphaDao alphaDao = applicationContext.getBean(AlphaDao.class);
-		System.out.println(alphaDao.select());
-
-		alphaDao = applicationContext.getBean("alphaHibernate", AlphaDao.class);
-		System.out.println(alphaDao.select());
-	}
 
 	@Test
 	public void testBeanManagement() {
@@ -55,9 +45,6 @@ public class CommunityApplicationTests implements ApplicationContextAware {
 		System.out.println(simpleDateFormat.format(new Date()));
 	}
 
-	@Autowired
-	@Qualifier("alphaHibernate")
-	private AlphaDao alphaDao;
 
 	@Autowired
 	private AlphaService alphaService;
@@ -67,7 +54,6 @@ public class CommunityApplicationTests implements ApplicationContextAware {
 
 	@Test
 	public void testDI() {
-		System.out.println(alphaDao);
 		System.out.println(alphaService);
 		System.out.println(simpleDateFormat);
 	}

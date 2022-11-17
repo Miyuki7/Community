@@ -1,7 +1,6 @@
 package com.miyuki.community.controller;
 
 import com.miyuki.community.entity.*;
-import com.nowcoder.community.entity.*;
 import com.miyuki.community.event.EventProducer;
 import com.miyuki.community.service.CommentService;
 import com.miyuki.community.service.DiscussPostService;

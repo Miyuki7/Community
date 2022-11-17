@@ -8,15 +8,15 @@
 		<version>2.1.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.nowcoder.community</groupId>
+	<groupId>com.miyuki</groupId>
 	<artifactId>community</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>community</name>
-	<description>nowcoder community</description>
+	<description>miyuki community</description>
 	<packaging>war</packaging>
 
 	<properties>
-		<java.version>12</java.version>
+		<java.version>8</java.version>
 	</properties>
 
 	<dependencies>

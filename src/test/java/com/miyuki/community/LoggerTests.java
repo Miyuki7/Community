@@ -15,6 +15,6 @@ public class LoggerTests {
 
     private static final Logger logger = LoggerFactory.getLogger(LoggerTests.class);
 
-    
+
 
 }

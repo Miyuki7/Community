@@ -26,15 +26,6 @@ public class MailTests {
         mailClient.sendMail("1426604413@qq.com", "TEST", "Welcome.");
     }
 
-    @Test
-    public void testHtmlMail() {
-        Context context = new Context();
-        context.setVariable("username", "sunday");
-
-        String content = templateEngine.process("/mail/demo", context);
-        System.out.println(content);
-
-        mailClient.sendMail("1426604413@qq.com", "HTML", content);
-    }
+    
 
 }

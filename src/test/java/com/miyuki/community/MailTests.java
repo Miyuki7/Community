@@ -26,6 +26,6 @@ public class MailTests {
         mailClient.sendMail("1426604413@qq.com", "TEST", "Welcome.");
     }
 
-    
+
 
 }

@@ -23,16 +23,7 @@ public class RedisTests {
 
 
 
-    @Test
-    public void testHashes() {
-        String redisKey = "test:user";
 
-        redisTemplate.opsForHash().put(redisKey, "id", 1);
-        redisTemplate.opsForHash().put(redisKey, "username", "zhangsan");
-
-        System.out.println(redisTemplate.opsForHash().get(redisKey, "id"));
-        System.out.println(redisTemplate.opsForHash().get(redisKey, "username"));
-    }
 
     @Test
     public void testLists() {
